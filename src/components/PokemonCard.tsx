@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 import { ISinglePokemon } from '../interfaces/pokeInterfaces';
 import { FadeInImage } from './FadeInImage';
-import ImageColors from 'react-native-image-colors';
 import { getImageBgColor } from '../helpers/colorHelper';
+import { useNavigation } from '@react-navigation/core';
 
 const winWith = Dimensions.get('window').width;
 
@@ -21,6 +21,7 @@ interface IProps {
 const PokemonCard = ({ pokemon }: IProps) => {
   const [bgColor, setBgColor] = useState('grey');
   const isMounted = useRef(true);
+  const navigation = useNavigation();
 
   useEffect(() => {
     setBackgroundColor();
@@ -35,8 +36,12 @@ const PokemonCard = ({ pokemon }: IProps) => {
     setBgColor(backgroundColor);
   };
 
+  const handleCardPress = () => {
+    navigation.navigate('Pokemon', { singlePokemon: pokemon, bgColor });
+  };
+
   return (
-    <TouchableOpacity activeOpacity={0.9}>
+    <TouchableOpacity activeOpacity={0.9} onPress={handleCardPress}>
       <View style={{ ...styles.cardContainer, backgroundColor: bgColor }}>
         <View>
           <Text style={styles.name}>
@@ -78,6 +83,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     top: 20,
     left: 10,
+    textTransform: 'capitalize',
   },
   pokeballContainer: {
     width: 100,

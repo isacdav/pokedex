@@ -3,8 +3,17 @@ import { StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from '../screens/HomeScreen';
 import PokemonScreen from '../screens/PokemonScreen';
+import { ISinglePokemon } from '../interfaces/pokeInterfaces';
 
-const Stack = createStackNavigator();
+export type RootStackParams = {
+  Home: undefined;
+  Pokemon: {
+    singlePokemon: ISinglePokemon;
+    bgColor: string;
+  };
+};
+
+const Stack = createStackNavigator<RootStackParams>();
 
 const PokemonNavigator = () => {
   return (
