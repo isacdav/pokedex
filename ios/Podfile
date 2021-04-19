@@ -27,3 +27,5 @@ target 'pokedex' do
     react_native_post_install(installer)
   end
 end
+
+# TODO: Add icons in ios
