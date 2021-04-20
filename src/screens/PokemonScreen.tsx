@@ -2,7 +2,7 @@ import React from 'react';
 import { ActivityIndicator, Image, StyleSheet, Text, View } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { RootStackParams } from '../navigation/StackNavigator';
+import { RootStackParams } from '../navigation/MainNavigator';
 import { FadeInImage } from '../components/FadeInImage';
 import { usePokemon } from '../hooks/usePokemon';
 import BackButton from '../components/BackButton';

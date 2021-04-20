@@ -1,11 +1,21 @@
-import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
-import PokemonNavigator from './StackNavigator';
+import { NavigationContainer } from '@react-navigation/native';
+import { ISinglePokemon } from '../interfaces/pokeInterfaces';
+import TabNavigator from './TabNavigator';
+
+export type RootStackParams = {
+  Home: undefined;
+  Search: undefined;
+  Pokemon: {
+    singlePokemon: ISinglePokemon;
+    bgColor: string;
+  };
+};
 
 const MainNavigator = () => {
   return (
     <NavigationContainer>
-      <PokemonNavigator />
+      <TabNavigator />
     </NavigationContainer>
   );
 };

@@ -16,9 +16,10 @@ const winWith = Dimensions.get('window').width;
 
 interface IProps {
   pokemon: ISinglePokemon;
+  size?: 'medium' | 'large';
 }
 
-const PokemonCard = ({ pokemon }: IProps) => {
+const PokemonCard = ({ pokemon, size = 'medium' }: IProps) => {
   const [bgColor, setBgColor] = useState('grey');
   const isMounted = useRef(true);
   const navigation = useNavigation();
@@ -42,7 +43,14 @@ const PokemonCard = ({ pokemon }: IProps) => {
 
   return (
     <TouchableOpacity activeOpacity={0.9} onPress={handleCardPress}>
-      <View style={{ ...styles.cardContainer, backgroundColor: bgColor }}>
+      <View
+        style={{
+          ...styles.cardContainer,
+          backgroundColor: bgColor,
+          width: size === 'medium' ? winWith * 0.4 : winWith * 0.8,
+          marginHorizontal: size === 'medium' ? 10 : winWith * 0.05,
+          height: size === 'medium' ? 120 : 90,
+        }}>
         <View>
           <Text style={styles.name}>
             {pokemon.name}
@@ -63,9 +71,6 @@ const PokemonCard = ({ pokemon }: IProps) => {
 
 const styles = StyleSheet.create({
   cardContainer: {
-    marginHorizontal: 10,
-    height: 120,
-    width: winWith * 0.4,
     marginBottom: 25,
     borderRadius: 10,
     shadowColor: '#000',
