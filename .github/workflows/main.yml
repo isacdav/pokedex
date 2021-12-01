@@ -57,7 +57,7 @@ jobs:
           cd ios && pod install
       - name: Build app
         run: |
-          cd ios && xcodebuild -workspace pokedex.xcworkspace -configuration Debug -scheme pokedex -allowProvisioningUpdates PROVISIONING_PROFILE="6e4e2733-d4b5-4011-b97c-c80827f77675"
+          cd ios && xcodebuild -workspace pokedex.xcworkspace -configuration Debug -scheme pokedex -allowProvisioningUpdates PROVISIONING_PROFILE="6e4e2733-d4b5-4011-b97c-c80827f77675" CODE_SIGNING_ALLOWED=NO
           #mv pokedex.ipa ../pokedex.ipa
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
