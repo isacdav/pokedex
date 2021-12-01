@@ -57,7 +57,7 @@ jobs:
           cd ios && pod install
       - name: Build app
         run: |
-          cd ios && xcodebuild -workspace pokedex.xcworkspace -configuration release -scheme pokedex -allowProvisioningUpdates
+          cd ios && xcodebuild -workspace pokedex.xcworkspace -configuration debug -scheme pokedex -allowProvisioningUpdates
           #mv pokedex.ipa ../pokedex.ipa
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
