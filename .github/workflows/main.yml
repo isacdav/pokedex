@@ -46,15 +46,13 @@ jobs:
       - name: Install pod dependencies
         run: |
           cd ios && pod install
-      - name: Build ios
-        uses: yukiarrr/ios-build-action@v1.3.2
-        with:
-          project-path: ios/pokedex.xcodeproj
-          workspace-path: ios/pokedex.xcworkspace
-          output-path: output/output.ipa
-          scheme: pokedex
+      - name: Build app
+        run: |
+          xcodebuild -workspace pokedex.xcworkspace -scheme pokedex archive -archivePath pokedex.xcarchive -allowProvisioningUpdates -UseModernBuildSystem=NO
+          xcodebuild -exportArchive -archivePath ./pokedex.xcarchive -exportPath . -exportOptionsPlist pokedex/Info.plist
+          mv pokedex.ipa ../pokedex.ipa
       - name: Upload Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v1
         with:
-          name: artifact
-          path: output/output.ipa
+          name: pokedex.ipa
+          path: ios/build/
