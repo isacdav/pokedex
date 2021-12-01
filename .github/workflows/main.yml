@@ -28,12 +28,12 @@ jobs:
             cd android && chmod +x gradlew
         - name: Build Android Release
           run: |
-            cd android && ./gradlew assembleDebug
+            cd android && ./gradlew assembleRelease
         - name: Upload Artifact
           uses: actions/upload-artifact@v1
           with:
-            name: app-debug.apk
-            path: android/app/build/outputs/apk/debug/
+            name: app-release.apk
+            path: android/app/build/outputs/apk/release/
             
   build-ios:
       #needs: install-and-test
