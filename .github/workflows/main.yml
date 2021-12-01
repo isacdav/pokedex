@@ -61,5 +61,5 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: pokedex.ipa
+          name: pokedex-app
           path: ios/DerivedData/**/pokedex.app
