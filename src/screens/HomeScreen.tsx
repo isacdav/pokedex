@@ -36,6 +36,7 @@ const HomeScreen = () => {
               style={{
                 ...styles.title,
                 top: top + 20,
+                marginBottom: top + 20,
               }}>
               Pokedex
             </Text>

@@ -38,6 +38,7 @@ const TabNavigator = () => {
         name='SearchTab'
         component={SearchNavigator}
         options={{
+          tabBarLabel: 'Search',
           tabBarIcon: ({ color }) => (
             <Icon name='search-outline' color={color} size={25} />
           ),
