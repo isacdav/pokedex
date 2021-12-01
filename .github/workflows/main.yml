@@ -62,4 +62,5 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: pokedex-app
-          path: ios/DerivedData/**/pokedex.app
+          path: 'ios/DerivedData/**/pokedex.app'
+          retention-days: 1
