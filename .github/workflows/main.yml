@@ -13,7 +13,7 @@ jobs:
           npm install
       - name: Run tests
         run: |
-          npm test
+          npm test --passWithNoTests
 
   build-android:
       #needs: install-and-test
