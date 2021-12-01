@@ -1,9 +1,15 @@
 name: Build Android and iOS
 on:
-  workflow_dispatch:
   push:
     branches:
       - release
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Reason (optional)'
+        required: false
+        default: 'Manual'
+        
 jobs:
   install-and-test:
     runs-on: ubuntu-latest
