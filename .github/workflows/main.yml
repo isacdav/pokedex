@@ -2,15 +2,65 @@ name: Build Android and iOS
 on:
   push:
     branches:
+      - main
       - release
+      - 'release/**'
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Reason (optional)'
+        required: false
+        default: 'Manual'
+        
 jobs:
   install-and-test:
     runs-on: ubuntu-latest
-    steps: 
+    steps:
       - uses: actions/checkout@v2
       - name: Install npm dependencies
         run: |
-          npm install
+          yarn install
       - name: Run tests
         run: |
           npm test
+
+  build-android:
+    #needs: install-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install npm dependencies
+        run: |
+          yarn install
+      - name: Graddle fix (for permission denied error)
+        run: |
+          cd android && chmod +x gradlew
+      - name: Build Android Release
+        run: |
+          cd android && ./gradlew assembleRelease
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: app-release
+          path: android/app/build/outputs/apk/release/
+
+  build-ios:
+    #needs: install-and-test
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install npm dependencies
+        run: |
+          yarn install
+      - name: Install pod dependencies
+        run: |
+          cd ios && pod install
+      - name: Build app
+        run: |
+          cd ios && xcodebuild -workspace pokedex.xcworkspace -configuration Debug -scheme pokedex -allowProvisioningUpdates PROVISIONING_PROFILE="6e4e2733-d4b5-4011-b97c-c80827f77675" CODE_SIGNING_ALLOWED=NO
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: pokedex-app
+          path: ios/pokedex.xcworkspace
+  

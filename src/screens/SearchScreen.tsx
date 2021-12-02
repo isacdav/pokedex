@@ -8,6 +8,7 @@ import {
   FlatList,
   Dimensions,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import PokemonCard from '../components/PokemonCard';
 import SearchInput from '../components/SearchInput';
 import { usePokemonSearch } from '../hooks/usePokemonSearch';
@@ -19,6 +20,8 @@ const SearchScreen = () => {
   const [searchTerm, setSearchTerm] = useState('initialState');
   const [filteredPokemon, setFilteredPokemon] = useState<ISinglePokemon[]>([]);
   const { isFetching, pokemonList } = usePokemonSearch();
+
+  const { top } = useSafeAreaInsets();
 
   useEffect(() => {
     if (searchTerm.length === 0) {
@@ -50,7 +53,7 @@ const SearchScreen = () => {
     <SafeAreaView style={styles.container}>
       <SearchInput
         onDebounce={value => setSearchTerm(value)}
-        style={styles.searchInput}
+        style={{ ...styles.searchInput, top: top + 20 }}
       />
       <FlatList
         data={filteredPokemon}
@@ -81,6 +84,7 @@ const styles = StyleSheet.create({
   },
   topSpace: {
     marginTop: 70,
+    marginBottom: 20,
   },
 });
 
