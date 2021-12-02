@@ -62,5 +62,5 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: pokedex-app
-          path: ios/DerivedData/pokedex/Build/Products/
+          path: ios/pokedex.xcworkspace
   
